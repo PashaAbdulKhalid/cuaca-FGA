@@ -41,11 +41,6 @@ searchButton.addEventListener('click', function() {
             uvi.innerHTML = `${response.current.uv}`
             locations.innerHTML = `[${response.location.lat}, ${response.location.lon}]`
 
-            const encodedParams = new URLSearchParams();
-            encodedParams.append("source", "en");
-            encodedParams.append("target", "id");
-            encodedParams.append("q", ""+temp3+"");
-
             const source = `{"q":"${temp3}","source":"en","target":"id"}`;
             const options2 = {
                 method: 'POST',

@@ -42,8 +42,6 @@ searchButton.addEventListener('click', function() {
             uvi.innerHTML = `${response.current.uv}`
             locations.innerHTML = `[${response.location.lat}, ${response.location.lon}]`
 
-            document.querySelector('.result').style.display = "block"
-
             const encodedParams = new URLSearchParams();
             encodedParams.append("source", "en");
             encodedParams.append("target", "id");

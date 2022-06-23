@@ -12,7 +12,9 @@ inputKeyword.addEventListener("keypress", function(event) {
 
 searchButton.addEventListener('click', function() {
     document.querySelector('.result').style.display = "none";
-
+    document.querySelector('.result2').style.display = "none";
+    
+    //API 1 - Weather API
     const options = {
         method: 'GET',
         headers: {
@@ -25,7 +27,7 @@ searchButton.addEventListener('click', function() {
         .then(response => response.json())
         .then(response => {
             
-            let imgs = document.querySelector('#imgs')
+            let imgs = document.querySelector('#imgs');
             let location = document.querySelector('#location');
             let temp1 = document.querySelector('#temp1');
             let temp3 = response.current.condition.text;
@@ -40,7 +42,8 @@ searchButton.addEventListener('click', function() {
             winds.innerHTML = `${response.current.wind_kph} KM/Jam`
             uvi.innerHTML = `${response.current.uv}`
             locations.innerHTML = `[${response.location.lat}, ${response.location.lon}]`
-
+            
+            //API 2 - Deep Translate
             const source = `{"q":"${temp3}","source":"en","target":"id"}`;
             const options2 = {
                 method: 'POST',
@@ -57,19 +60,18 @@ searchButton.addEventListener('click', function() {
                 .then(response2 => {
                     let temp2 = document.querySelector('#temp2');
                     temp2.innerHTML = `${response2.data.translations.translatedText}`
-
                     document.querySelector('.result').style.display = "block";
                 })
                 .catch(err => console.error(err));
         })
         .catch(() => {
-            let result2 = document.querySelector('.result')
+            let result2 = document.querySelector('.result2');
 
-            result2.innerHTML = `
-            <h2 style="margin-top: 100px;">Location Not Found</h2>`
-                            
+            result2.innerHTML = `<h2 style="margin-top: 100px;">Daerah Tidak Ditemukan</h2>`
+
+            document.querySelector('.result2').style.display = "block";
         });
-        
+
     inputKeyword.value = null;
         
 
